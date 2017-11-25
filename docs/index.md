@@ -21,7 +21,7 @@ wget https://github.com/jgarff/rpi_ws281x/archive/master.zip && unzip master.zip
 # Connect Raspberry And LED Strip (First Try)
 
 - connect pi and strip
-- (TODO Image)
+![](assets\images\pi_led_connect_test.png)
 - navigate to checked out WS281X library
 ```
 #change variable LED_COUNT to actual led count of strip
@@ -34,7 +34,7 @@ python python/examples/strandtest.py
 # Build Clock
 - cut strip
 - place it in ribba
-- TODO image
+![](assets\images\led_cut.png)
 - solder strip back toggether
 - TODO image
 - connect with raspberry pi
