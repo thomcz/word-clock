@@ -1,2 +1,2 @@
 # word-clock
-Test setup based on: http://dordnung.de/raspberrypi-ledstrip/ws2812
+see documentation at: http://thomasczogalik.de/word-clock
