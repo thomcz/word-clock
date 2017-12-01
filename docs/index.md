@@ -43,7 +43,7 @@ python python/examples/strandtest.py
 
 # Software
 
-# Refrences
+# References
 - https://tutorials-raspberrypi.de/raspberry-pi-ws2812-ws2811b-rgb-led-streifen-steuern/
 - http://dordnung.de/raspberrypi-ledstrip/ws2812
 - https://github.com/bk1285/rpi_wordclock
