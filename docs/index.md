@@ -42,3 +42,8 @@ python python/examples/strandtest.py
 - create letter stencil for glass
 
 # Software
+
+# Refrences
+- https://tutorials-raspberrypi.de/raspberry-pi-ws2812-ws2811b-rgb-led-streifen-steuern/
+- http://dordnung.de/raspberrypi-ledstrip/ws2812
+- https://github.com/bk1285/rpi_wordclock
