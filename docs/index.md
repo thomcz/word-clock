@@ -55,5 +55,13 @@ python python/examples/strandtest.py
 - put everything together
 - connect and test with python strandtest
 # Software
+<<<<<<< HEAD
 now fun part begins!! 
 
+=======
+
+# References
+- https://tutorials-raspberrypi.de/raspberry-pi-ws2812-ws2811b-rgb-led-streifen-steuern/
+- http://dordnung.de/raspberrypi-ledstrip/ws2812
+- https://github.com/bk1285/rpi_wordclock
+>>>>>>> d04a7e3cd585d0b823972c1c64d04a0a6dc79dab
