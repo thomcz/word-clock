@@ -58,7 +58,7 @@ python python/examples/strandtest.py
 # Software
 ## States (German)
 
-- Es ist 
+Es ist 
 - X Uhr
 - Fünf nach X
 - Zehn nach X
