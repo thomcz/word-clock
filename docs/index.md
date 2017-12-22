@@ -54,6 +54,7 @@ python python/examples/strandtest.py
 - put white paper on back of stencil to dim the leds 
 - put everything together
 - connect and test with python strandtest
+
 # Software
 ## States (German)
 
@@ -71,7 +72,7 @@ python python/examples/strandtest.py
 - Zehn vor X
 - Fünf vor X
 
-## LED ID Grid
+## LED-ID Grid
 ```
 9 10 29 30 49 50 69 70 89 90 109
 8 11 28 31 48 51 68 71 88 91 108
@@ -84,6 +85,9 @@ python python/examples/strandtest.py
 1 18 21 38 41 58 61 78 81 98 101
 0 19 20 39 40 59 60 79 80 99 100 
 ```
+
+## Code
+Python script can be found [here](https://github.com/thomcz/word-clock/blob/master/python/wordclock.py)
 
 # References
 - https://tutorials-raspberrypi.de/raspberry-pi-ws2812-ws2811b-rgb-led-streifen-steuern/
