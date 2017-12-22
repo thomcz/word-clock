@@ -3,6 +3,8 @@ import datetime
 
 from neopixel import *
 
+#from array import array
+
 # LED strip configuration:
 LED_COUNT      = 110      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -57,8 +59,6 @@ FUENF_VOR_HALB = FUENF_MINUTE + VOR + HALB
 
 UHR = [80,99,100]
 
-color = Color(255, 255, 255)
-
 def setClock(strip, color, ledList):
         for led in ledList:
                 strip.setPixelColor(led, color)
@@ -70,64 +70,51 @@ def resetLeds():
 		strip.show()
 
 if __name__ == '__main__':
+        # Process arguments
+        #opt_parse()
+
         # Create NeoPixel object with appropriate configuration.
         strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
         # Intialize the library (must be called once before other functions).
         strip.begin()
-        
-	oldState = 0
-	actuallState = 0
-        try:
-		while True:
-                	now = datetime.datetime.now()
-			print(now)
-	                minute = now.minute
-        	        hour = now.hour
-		
-			leds = []
-
-	                if (minute < 5):
-				state = 5
-                	        leds = ES_IST + STUNDE[hour%12] + UHR
-	                elif (minute < 10):
-				state = 10
-        	                leds = ES_IST + FUENF_NACH + STUNDE[hour%12]
-	                elif (minute < 15):
-				state = 15
-                	        leds = ES_IST + ZEHN_NACH + STUNDE[hour%12]
-	                elif (minute < 20):
-				state = 20
-                	        leds = ES_IST + VIERTEL_NACH + STUNDE[hour%12]
-			elif (minute < 25):
-				state = 25
-                	        leds = ES_IST + ZWANZIG_NACH + STUNDE[hour%12]
-	                elif (minute < 30):
-				state = 30
-                	        leds = ES_IST + FUENF_VOR_HALB + STUNDE[hour%12]
-	                elif (minute < 35):
-				state = 35
-                	        leds = ES_IST + HALB + STUNDE[(hour+1)%12]
-	                elif (minute < 40):
-				state = 40
-                	        leds = ES_IST + FUENF_NACH_HALB + STUNDE[(hour+1)%12]
-	                elif (minute < 45):
-				state = 45
-				leds = ES_IST + ZWANZIG_VOR + STUNDE[(hour+1)%12]
-	                elif (minute < 50):
-				state = 50
-               			leds = ES_IST + VIERTEL_VOR + STUNDE[(hour+1)%12]
-	                elif (minute < 55):
-				state = 55
-				leds = ES_IST + ZEHN_VOR + STUNDE[(hour+1)%12]
-	                elif (minute < 60):
-				state = 60
-                	        leds = ES_IST + FUENF_VOR + STUNDE[(hour+1)%12]
-
-			if (oldState != state):
-				resetLeds()
-				setClock(strip, color, leds)
-			oldState = state
-			time.sleep(30)
-	finally:
+        #print ('Press Ctrl-C to quit.')
+        while True:
 		resetLeds()
-		strip._cleanup()
+                color = Color(255,255,255)
+                now = datetime.datetime.now()
+		print(now)
+                minute = now.minute
+                hour = now.hour
+
+                if (minute < 5):
+                        setClock(strip, color, ES_IST + STUNDE[hour%12] + UHR)
+                elif (minute < 10):
+                        setClock(strip, color, ES_IST + FUENF_NACH + STUNDE[hour%12])
+                elif (minute < 15):
+                        setClock(strip, color, ES_IST + ZEHN_NACH + STUNDE[hour%12])
+                elif (minute < 20):
+                        setClock(strip, color, ES_IST + VIERTEL_NACH + STUNDE[hour%12])
+		elif (minute < 25):
+                        setClock(strip, color, ES_IST + ZWANZIG_NACH + STUNDE[hour%12])
+                elif (minute < 30):
+                        setClock(strip, color, ES_IST + FUENF_VOR_HALB + STUNDE[hour%12])
+                elif (minute < 35):
+                        setClock(strip, color, ES_IST + HALB + STUNDE[(hour+1)%12])
+                elif (minute < 40):
+                        setClock(strip, color, ES_IST + FUENF_NACH_HALB + STUNDE[(hour+1)%12])
+                elif (minute < 45):
+                        setClock(strip, color, ES_IST + ZWANZIG_VOR + STUNDE[(hour+1)%12])
+                elif (minute < 50):
+                        setClock(strip, color, ES_IST + VIERTEL_VOR + STUNDE[(hour+1)%12])
+                elif (minute < 55):
+                        setClock(strip, color, ES_IST + ZEHN_VOR + STUNDE[(hour+1)%12])
+                elif (minute < 60):
+                        
+		setClock(strip, color, ES_IST + FUENF_VOR + STUNDE[(hour+1)%12])
+		time.sleep(30)
+
+                #setClock(strip, Color(255, 0, 0), ES_IST + VIERTEL_VOR + EIN)  # Red wipe
+                #colorWipe(strip, Color(0, 255, 0))  # Blue wipe
+                #colorWipe(strip, Color(0, 0, 255))  # Green wipe
+
+ 
