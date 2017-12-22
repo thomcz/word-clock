@@ -56,6 +56,7 @@ python python/examples/strandtest.py
 - connect and test with python strandtest
 # Software
 ## States (German)
+
 - Es ist 
 - X Uhr
 - Fünf nach X
@@ -71,6 +72,7 @@ python python/examples/strandtest.py
 - Fünf vor X
 
 ## LED ID Grid
+```
 9 10 29 30 49 50 69 70 89 90 109
 8 11 28 31 48 51 68 71 88 91 108
 7 12 27 32 47 52 67 72 87 92 107
@@ -81,6 +83,7 @@ python python/examples/strandtest.py
 2 17 22 37 42 57 62 77 82 97 102
 1 18 21 38 41 58 61 78 81 98 101
 0 19 20 39 40 59 60 79 80 99 100 
+```
 
 # References
 - https://tutorials-raspberrypi.de/raspberry-pi-ws2812-ws2811b-rgb-led-streifen-steuern/
