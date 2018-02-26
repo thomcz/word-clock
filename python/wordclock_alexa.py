@@ -1,13 +1,14 @@
-import time 
 import logging
 from wordclock import WordClock
 from countdown import Countdown
+from ledsoff import LedsOff
 from stoppablethread import StoppableThread
 import threading
 
 from neopixel import *
 
-from flask import Flask
+from flask import Flask, render_template
+
 from flask_ask import Ask, statement, convert_errors
 
 app = Flask(__name__)
@@ -18,27 +19,39 @@ threads = []
 
 @ask.intent('Wordclock')
 def wordclock():
-        clock = WordClock(Color(255,255,255))
-        t = StoppableThread(clock.start, 10)
-        t.start()
-        threads.append(t)
-        return statement('Uhr gestartet')
+    __wordclock()
+    return statement(render_template('wordclock_start'))
 
 @ask.intent('Countdown')
 def countdown():
-        countdown = Countdown(Color(255,255,255))
-        t = threading.Thread(target = countdown.start)
-        t.start()
-        return statement('Countdown gestartet')
+    countdown = Countdown(Color(255,255,255))
+    __run(countdown.run, 0, False)
+    return statement(render_template('countdown_start'))
 
-@ask.intent('Stopp' )
+@ask.intent('LedsOff')
+def ledsOff():
+    off = LedsOff()
+    __run(off.run, 0, False)
+    return statement(render_template('lights_off'))
+
+@ask.intent('Stopp')
 def stop():
-        for t in threads:
-                t.stop()
-                t.join()
-        return statement("stopp")
-                
-if __name__ == '__main__':
-        app.run()
+    for thread in threads:
+        thread.stop()
+        thread.join()
+    return statement("")
 
+def __run(func, waitingTime, loop):
+    stop()
+    thread = StoppableThread(func, waitingTime, loop)
+    thread.start()
+    threads.append(thread)
+
+def __wordclock():
+    clock = WordClock(Color(255,255,255))
+    __run(clock.run, 10, True)
+
+if __name__ == '__main__':
+    __wordclock()    
+    app.run()
 
