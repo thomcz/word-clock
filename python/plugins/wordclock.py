@@ -1,14 +1,14 @@
 import datetime
 
-from WordClockStates import WordClockStates
-from ledstrip import LedStrip
+from strip.states import WordClockStates
+from strip.ledstrip import LedStrip
 
 from neopixel import *
 
 
 class WordClock:
     def run(self):
-    	wordState = WordClockStates()
+        wordState = WordClockStates()
     	now = datetime.datetime.now()
 	print(now)
         minute = now.minute

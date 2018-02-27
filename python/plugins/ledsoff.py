@@ -1,4 +1,4 @@
-from ledstrip import LedStrip
+from strip.ledstrip import LedStrip
 
 class LedsOff():
 

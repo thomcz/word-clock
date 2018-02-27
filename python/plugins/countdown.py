@@ -1,7 +1,7 @@
 from time import sleep
 
-from WordClockStates import WordClockStates
-from ledstrip import LedStrip
+from strip.states import WordClockStates
+from strip.ledstrip import LedStrip
 
 from neopixel import *
  

@@ -1,4 +1,4 @@
-from LEDConfiguration import LEDConfiguration
+from ledconfig import LEDConfiguration
 
 from neopixel import *
 

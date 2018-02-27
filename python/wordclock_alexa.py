@@ -1,8 +1,8 @@
 import logging
-from wordclock import WordClock
-from countdown import Countdown
-from ledsoff import LedsOff
-from stoppablethread import StoppableThread
+from plugins.wordclock import WordClock
+from plugins.countdown import Countdown
+from plugins.ledsoff import LedsOff
+from tools.stoppablethread import StoppableThread
 import threading
 
 from neopixel import *
