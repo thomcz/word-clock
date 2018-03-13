@@ -1,15 +1,13 @@
 import datetime
 
-from strip.states import WordClockStates
-from strip.ledstrip import LedStrip
+import strip.states as wordState
 
 from neopixel import *
 
 
 class WordClock:
     def run(self):
-        wordState = WordClockStates()
-    	now = datetime.datetime.now()
+        now = datetime.datetime.now()
 	print(now)
         minute = now.minute
     	hour = now.hour
@@ -44,9 +42,7 @@ class WordClock:
         self.strip.setLeds(leds, self.color)
 	    
 
-    def __init__(self, color):
-        self.strip = LedStrip()
+    def __init__(self, color, strip):
+        self.strip = strip
         self.color = color
 
-if __name__ == '__main__':
-    WordClock(Color(255,255,255)).start()

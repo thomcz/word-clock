@@ -4,5 +4,8 @@ wordclock_start: Wörter Uhr gestartet
 #countdown
 countdown_start: Countdown gestartet
 
+#gol
+gol_start: Game of Life gestartet
+
 #lights off
 lights_off: Lichter ausgeschaltet

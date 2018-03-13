@@ -1,4 +1,4 @@
-from ledconfig import LEDConfiguration
+import ledconfig
 
 from neopixel import *
 
@@ -14,8 +14,7 @@ class LedStrip():
     	self.strip.show()
 
     def __init__(self):
-    	ledConfig = LEDConfiguration()
-	self.strip = Adafruit_NeoPixel(ledConfig.LED_COUNT, ledConfig.LED_PIN, ledConfig.LED_FREQ_HZ, ledConfig.LED_DMA, ledConfig.LED_INVERT, ledConfig.LED_BRIGHTNESS, ledConfig.LED_CHANNEL, ledConfig.LED_STRIP)
+    	self.strip = Adafruit_NeoPixel(ledconfig.LED_COUNT, ledconfig.LED_PIN, ledconfig.LED_FREQ_HZ, ledconfig.LED_DMA, ledconfig.LED_INVERT, ledconfig.LED_BRIGHTNESS, ledconfig.LED_CHANNEL, ledconfig.LED_STRIP)
         self.strip.begin()
 
 
