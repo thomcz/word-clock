@@ -3,6 +3,7 @@ from plugins.wordclock import WordClock
 from plugins.countdown import Countdown
 from plugins.gameoflife import GameOfLife
 from plugins.ledsoff import LedsOff
+from plugins.ledtest import LedTest
 from strip.ledstrip import LedStrip
 from tools.stoppablethread import StoppableThread
 import threading
@@ -61,6 +62,11 @@ def __run(func, waitingTime, loop):
 def __wordclock():
     clock = WordClock(Color(255,255,255), ledStrip)
     __run(clock.run, 10, True)
+
+def __ledtest():
+    test = LedTest(Color(255,255,255), ledStrip)
+    __run(test.run, 0, False)
+
 
 if __name__ == '__main__':
     __wordclock()
