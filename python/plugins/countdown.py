@@ -13,7 +13,7 @@ class Countdown():
             sleep(1)
 
     def __init__(self, color, strip):
-        self.strip = srip
+        self.strip = strip
         self.color = color
 
 
