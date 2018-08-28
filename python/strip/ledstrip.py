@@ -6,11 +6,11 @@ class LedStrip():
     def setLeds(self, ledList, color):
         for led in ledList:
             self.strip.setPixelColor(led, color)
-	    self.strip.show()
+	self.strip.show()
 
-    def setLed(self, led, color):
-        self.strip.setPixelColor(led, color)
-        self.strip.show()
+    #def setLed(self, led, color):
+    #    self.strip.setPixelColor(led, color)
+    #    self.strip.show()
 
     def resetLeds(self):
 	for led in range(self.strip.numPixels()):

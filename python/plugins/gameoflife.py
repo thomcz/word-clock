@@ -8,14 +8,15 @@ class GameOfLife():
     def __init__(self, strip):
         self.strip = strip
         self.state = None
-        self.simulation = Simulation()
+        self.color = self.__getRandomColor()
 
     def run(self):
         if self.state is None:
             self.state = self.__getRandomState()
         while(True):
             self.__draw()
-            self.state = self.simulation.update(self.state)
+            self.state = self.__update(self.state)
+
             sleep(1)
 
     def __getRandomState(self):
@@ -24,7 +25,7 @@ class GameOfLife():
         for x in range(11):
             for y in range(10):
                 isLiving = randint(0, 1) == 1
-                color = self.__getRandomColor()
+                color = self.color
                 cell = Cell(x, y, ledPosition, isLiving, color)
                 state.state.append(cell)
                 ledPosition += 1
@@ -35,20 +36,13 @@ class GameOfLife():
 
     def __draw(self):
         leds = []
+        self.strip.resetLeds()
         for i in self.state.state:
             if i.isLiving:
-                self.strip.setLed(i.ledPosition, i.color)
-            else:
-                self.strip.setLed(i.ledPosition, 0)
+                leds.append(i.ledPosition)
+        self.strip.setLeds(leds, self.color)
 
-
-
-
-class Simulation():
-    def __init__(self):
-        self.state = None
-
-    def update(self, state):
+    def __update(self, state):
         newState = State()
         for position in range(ledconfig.LED_COUNT):
 
