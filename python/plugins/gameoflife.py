@@ -1,5 +1,6 @@
 from random import randint
 import strip.ledconfig as ledconfig
+import strip.ledposition as ledPosition
 from time import sleep
 
 from neopixel import *
@@ -21,14 +22,12 @@ class GameOfLife():
 
     def __getRandomState(self):
         state = State()
-        ledPosition = 0
         for x in range(11):
             for y in range(10):
-                isLiving = randint(0, 1) == 1
-                color = self.color
-                cell = Cell(x, y, ledPosition, isLiving, color)
+                isLiving = randint(0, 3) == 1
+                ledPos = ledPosition.ledPosition[(x, y)]
+                cell = Cell(x, y, ledPos, isLiving, self.color)
                 state.state.append(cell)
-                ledPosition += 1
         return state
 
     def __getRandomColor(self):
@@ -68,6 +67,9 @@ class GameOfLife():
 		
     def __countLivingNeighbours(self, state, cell):
         livingNeighbours = 0
+        x = cell.x
+        y = cell.y
+        if ledPosition.ledPosition[(x, y)]
         for i in range(ledconfig.LED_COUNT):
             actualCell = state.state[i]
             if actualCell.x == cell.x + 1 and actualCell.y == cell.y - 1 and actualCell.isLiving:
