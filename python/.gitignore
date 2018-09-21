@@ -101,6 +101,7 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
+templates/icons/
 # mkdocs documentation
 /site
 
