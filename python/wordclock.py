@@ -1,9 +1,11 @@
 import datetime
-
+from strip.ledstrip import LedStrip
 import strip.states as wordState
 from neopixel import *
 
 import logging
+from time import sleep
+import sys
 
 class WordClock:
     logging.basicConfig(filename='wordclock.log', format='%(asctime)s %(message)s')
@@ -37,8 +39,14 @@ class WordClock:
             wordState.STUNDE[hour] + \
             (wordState.UHR if(minute == 0) else [])
            
-
-
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print "invalid number of arguments"
+    LedStrip.getInstance().setBrightness(int(sys.argv[4]))
+    wordclock = WordClock(LedStrip.getInstance(), Color(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])))
+    while(True):
+        wordclock.run()
+        sleep(30)
 
 
 

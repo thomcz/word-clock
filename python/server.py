@@ -33,6 +33,15 @@ def countdown():
     executedProcess = subprocess.Popen(['python', 'countdown_runner.py'])
     return 'countdown started'
 
+@app.route('/brightness')
+def brightness():
+    global executedProcess
+    terminateRunningPlugin()
+    LedStrip.getInstance().setBrightness(40)
+    __wordclock()
+    return 'brightness set'
+
+
 @app.route('/shutdown')
 def shutdown():
     global executedProcess
@@ -76,7 +85,7 @@ def __wordclock():
     global executedProcess
 
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'wordclock_runner.py'])
+    executedProcess = subprocess.Popen(['python', 'wordclock.py', '123', '123', '123'])
     return 'wordclock started'
 
 #def __ledtest():
