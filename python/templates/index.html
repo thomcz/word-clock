@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="css/style.css" rel="stylesheet">
-    <script language="javascript" type="text/javascript" src="js/script.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
 
@@ -25,29 +25,29 @@
 
 
   <div class="row">
-    <div class="card" onclick="location.href='wordclock.html';">
-      <img src="icons/wordclock.png" style="width:40%">
+	  <div class="card" onclick="location.href='{{ url_for('wordclock') }}';">
+      <img src="{{ url_for('static', filename='icons/wordclock.png') }}" style="width:40%">
       <div class="container">
         <h4><b>Wordclock</b></h4> 
       </div>
     </div>
   
     <div class="card">
-      <img src="icons/countdown.png" style="width:40%">
+      <img src="{{ url_for('static', filename='icons/countdown.png') }}" style="width:40%">
       <div class="container">
         <h4><b>Countdown</b></h4> 
       </div>
     </div>
     
     <div class="card">
-      <img src="icons/snake.png" style="width:40%">
+      <img src="{{ url_for('static', filename='icons/snake.png') }}" style="width:40%">
       <div class="container">
         <h4><b>Snake</b></h4> 
       </div>
     </div>
     
     <div class="card">
-      <img src="icons/tetris.png" style="width:40%">
+      <img src="{{ url_for('static', filename='icons/tetris.png') }}" style="width:40%">
       <div class="container">
         <h4><b>Tetris</b></h4> 
       </div>

@@ -24,22 +24,23 @@ def index():
 
 @app.route('/wordclock')
 def wordclock():
-    return __wordclock()
+    return render_template('wordclock.html')
 
 @app.route('/countdown')
 def countdown():
-    global executedProcess
-    terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'countdown_runner.py'])
-    return 'countdown started'
+    return render_template('countdown.html')
+#    global executedProcess
+#    terminateRunningPlugin()
+ #   executedProcess = subprocess.Popen(['python', 'countdown_runner.py'])
+  #  return 'countdown started'
 
-@app.route('/brightness')
-def brightness():
-    global executedProcess
-    terminateRunningPlugin()
-    LedStrip.getInstance().setBrightness(40)
-    __wordclock()
-    return 'brightness set'
+#@app.route('/brightness')
+#def brightness():
+#    global executedProcess
+#    terminateRunningPlugin()
+#    LedStrip.getInstance().setBrightness(40)
+#    __wordclock()
+#    return 'brightness set'
 
 
 @app.route('/shutdown')
@@ -85,7 +86,7 @@ def __wordclock():
     global executedProcess
 
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'wordclock.py', '123', '123', '123'])
+    executedProcess = subprocess.Popen(['python', 'wordclock.py', '123', '123', '123', '123'])
     return 'wordclock started'
 
 #def __ledtest():

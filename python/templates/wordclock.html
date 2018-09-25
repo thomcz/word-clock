@@ -6,13 +6,13 @@
     
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="css/style.css" rel="stylesheet">
-    <script language="javascript" type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
 
   <div class="w3-bar w3-large w3-theme-d4">
-    <span class="w3-bar-item w3-button" onclick="onclick=location.href='index.html';"><i class="fas fa-chevron-left"></i></span>
+	  <span class="w3-bar-item w3-button" onclick="onclick=location.href='{{ url_for('index') }}';"><i class="fas fa-chevron-left"></i></span>
     <span class="w3-bar-item">Wordclock</span>
   </div>
 
