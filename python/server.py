@@ -10,7 +10,7 @@ import subprocess as subprocess
 
 from neopixel import *
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -22,17 +22,32 @@ executedProcess = None
 def index():
     return render_template('index.html')
 
-@app.route('/wordclock')
+@app.route('/wordclock', methods=['GET', 'POST'])
 def wordclock():
-    return render_template('wordclock.html')
+    if request.method == 'POST':
+        rgb = __hexToRGB(request.form['color'][1:])
+        __wordclock(rgb)
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        return render_template('wordclock.html')
 
-@app.route('/countdown')
+def __hexToRGB(color):
+    return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4)) 
+
+
+@app.route('/countdown', methods=['GET', 'POST'])
 def countdown():
-    return render_template('countdown.html')
-#    global executedProcess
-#    terminateRunningPlugin()
- #   executedProcess = subprocess.Popen(['python', 'countdown_runner.py'])
-  #  return 'countdown started'
+    if request.method == 'POST':
+        rgb = __hexToRGB(request.form['color'][1:])
+        __countdown(rgb)
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        return render_template('countdown.html')
+
+def __countdown(rgbColorTuple):
+    global executedProcess
+    terminateRunningPlugin()
+    executedProcess = subprocess.Popen(['python', 'plugins/countdown.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
 
 #@app.route('/brightness')
 #def brightness():
@@ -82,12 +97,11 @@ def terminateRunningPlugin():
 #    thread.start()
 #    threads.append(thread)
 
-def __wordclock():
+def __wordclock(rgbColorTuple):
     global executedProcess
 
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'wordclock.py', '123', '123', '123', '123'])
-    return 'wordclock started'
+    executedProcess = subprocess.Popen(['python', 'wordclock.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
 
 #def __ledtest():
 #    test = LedTest(Color(255,255,255), ledStrip)
@@ -95,5 +109,5 @@ def __wordclock():
 
 
 if __name__ == '__main__':
-    __wordclock()
+    __wordclock((123, 123, 123))
     app.run(host = '0.0.0.0')

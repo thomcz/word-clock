@@ -13,10 +13,10 @@
 
   <div class="w3-bar w3-large w3-theme-d4">
 	  <span class="w3-bar-item w3-button" onclick="onclick=location.href='{{ url_for('index') }}';"><i class="fas fa-chevron-left"></i></span>
-    <span class="w3-bar-item">Wordclock</span>
+    <span class="w3-bar-item">Countdown</span>
   </div>
 
-  <form action="{{ url_for('wordclock') }}" method="post">
+  <form action="{{ url_for('countdown') }}" method="post">
 	  <input type="color" name="color" value="#ff0000"></br>
 	  <input type="submit" class="button" value="Start">
   </form>

@@ -1,6 +1,6 @@
 import datetime
 from strip.ledstrip import LedStrip
-import strip.states as wordState
+import plugins.states as wordState
 from neopixel import *
 
 import logging
