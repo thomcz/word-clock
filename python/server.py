@@ -1,11 +1,5 @@
 from plugins.wordclock import WordClock
 from plugins.countdown import Countdown
-#from plugins.gameoflife import GameOfLife
-#from plugins.ledsoff import LedsOff
-#from plugins.ledtest import LedTest
-from strip.ledstrip import LedStrip
-#from tools.stoppablethread import StoppableThread
-#import threading
 import subprocess as subprocess
 
 from neopixel import *
@@ -13,8 +7,6 @@ from neopixel import *
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-
-ledStrip = LedStrip()
 
 executedProcess = None
 
@@ -62,7 +54,7 @@ def __countdown(rgbColorTuple):
 def shutdown():
     global executedProcess
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'shutdown.py'])
+    executedProcess = subprocess.Popen(['python', 'plugins/shutdown.py'])
     return 'shutdown'
 
 def terminateRunningPlugin():
@@ -101,7 +93,7 @@ def __wordclock(rgbColorTuple):
     global executedProcess
 
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'wordclock.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
+    executedProcess = subprocess.Popen(['python', 'plugins/wordclock.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
 
 #def __ledtest():
 #    test = LedTest(Color(255,255,255), ledStrip)

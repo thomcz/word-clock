@@ -1,48 +1,65 @@
 import datetime
-
-import strip.states as wordState
-
+from strip.ledstrip import LedStrip
+from strip.states import WordclockStates
 from neopixel import *
 
+import logging
+from time import sleep
+import sys
 
 class WordClock:
-    def run(self):
-        now = datetime.datetime.now()
-	print(now)
-        minute = now.minute
-    	hour = now.hour
+    logging.basicConfig(filename='wordclock.log', format='%(asctime)s %(message)s')
 
-	leds = []
-	self.strip.resetLeds()
-        if (minute < 5):
-            leds = wordState.ES_IST + wordState.STUNDE[hour%12] + wordState.UHR
-	elif (minute < 10):
-            leds =  wordState.ES_IST + wordState.FUENF_NACH + wordState.STUNDE[hour%12]
-        elif (minute < 15):
-            leds =  wordState.ES_IST + wordState.ZEHN_NACH + wordState.STUNDE[hour%12]
-	elif (minute < 20):
-    	    leds = wordState.ES_IST + wordState.VIERTEL_NACH + wordState.STUNDE[hour%12]
-      	elif (minute < 25):
-            leds = wordState.ES_IST + wordState.ZWANZIG_NACH + wordState.STUNDE[hour%12]
-	elif (minute < 30):
-    	    leds = wordState.ES_IST + wordState.FUENF_VOR_HALB + wordState.STUNDE[hour%12]
-    	elif (minute < 35):
-            leds = wordState.ES_IST + wordState.HALB + wordState.STUNDE[(hour+1)%12]
-        elif (minute < 40):
-    	    leds = wordState.ES_IST + wordState.FUENF_NACH_HALB + wordState.STUNDE[(hour+1)%12]
-        elif (minute < 45):
-            leds = wordState.ES_IST + wordState.ZWANZIG_VOR + wordState.STUNDE[(hour+1)%12]
-        elif (minute < 50):
-            leds = wordState.ES_IST + wordState.VIERTEL_VOR + wordState.STUNDE[(hour+1)%12]
-        elif (minute < 55):
-            leds = wordState.ES_IST + wordState.ZEHN_VOR + wordState.STUNDE[(hour+1)%12]
-        elif (minute < 60):
-            leds = wordState.ES_IST + wordState.FUENF_VOR + wordState.STUNDE[(hour+1)%12]
-
-        self.strip.setLeds(leds, self.color)
-	    
-
-    def __init__(self, color, strip):
+    def __init__(self, strip, color):
+        self.actualLeds = []
         self.strip = strip
         self.color = color
+    
+    def run(self):
+        now = datetime.datetime.now()
+        
+        logging.info('time was set')
+
+	newLeds = self.__calculateTime(now.minute, now.hour)
+        self.__setTime(newLeds)
+        
+    def __setTime(self, newLeds):    
+        if (self.actualLeds != newLeds):
+            self.strip.resetLeds()
+            self.strip.setLeds(newLeds, self.color)
+            self.actualLeds = newLeds
+
+        
+    def __calculateTime(self, minute, hour):   
+        minute = minute / 5
+        hour = hour % 12 + (1 if minute > 4 else 0)
+
+        wordState = WordclockStates.getInstance()
+        return wordState.getPrefix() + \
+            wordState.getMinute()[minute] + \
+            wordState.getHour()[hour] + \
+            (wordState.getPostfix() if(minute == 0) else [])
+           
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print "invalid number of arguments"
+    LedStrip.getInstance().setBrightness(int(sys.argv[4]))
+    wordclock = WordClock(LedStrip.getInstance(), Color(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])))
+    while(True):
+        wordclock.run()
+        sleep(30)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

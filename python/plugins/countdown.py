@@ -1,6 +1,7 @@
 from time import sleep
+from strip.ledstrip import LedStrip
+from strip.states import WordclockStates
 
-import states
 import sys
 
 from neopixel import *
@@ -8,7 +9,7 @@ from neopixel import *
 class Countdown():
 
     def run(self):
-        for hour in reversed(states.STUNDE):
+        for hour in reversed(WordclockStates.getInstance().getHour()):
             self.strip.resetLeds()
             self.strip.setLeds(hour, self.color)
             sleep(1)
@@ -22,4 +23,4 @@ if __name__ == "__main__":
         print "invalid number of arguments"
     LedStrip.getInstance().setBrightness(int(sys.argv[4]))
     countdown = Countdown(LedStrip.getInstance(), Color(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])))
-    tountdown.run()
+    countdown.run()
