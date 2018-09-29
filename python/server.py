@@ -9,6 +9,16 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 executedProcess = None
+brightness = 255
+programPath = '/home/pi/word-clock/python/plugins/'
+programStates = {
+        0 : 'shutdown.py',
+        1 : 'restart.py',
+        2 : 'wordclock.py',
+        3 : 'countdown.py'
+        }
+actualProgramState = 2
+rgbColorTuple = (255, 255, 255)
 
 @app.route('/')
 def index():
@@ -16,9 +26,10 @@ def index():
 
 @app.route('/wordclock', methods=['GET', 'POST'])
 def wordclock():
+    global rgbColorTuple 
     if request.method == 'POST':
-        rgb = __hexToRGB(request.form['color'][1:])
-        __wordclock(rgb)
+        rgbColorTuple = __hexToRGB(request.form['color'][1:])
+        __wordclock()
         return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template('wordclock.html')
@@ -29,33 +40,42 @@ def __hexToRGB(color):
 
 @app.route('/countdown', methods=['GET', 'POST'])
 def countdown():
+    global rgbColorTuple
     if request.method == 'POST':
-        rgb = __hexToRGB(request.form['color'][1:])
-        __countdown(rgb)
+        rgbColorTuple = __hexToRGB(request.form['color'][1:])
+        __countdown()
         return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template('countdown.html')
 
-def __countdown(rgbColorTuple):
-    global executedProcess
-    terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'plugins/countdown.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
+def __countdown():
+    global actualProgramState
 
-#@app.route('/brightness')
-#def brightness():
-#    global executedProcess
-#    terminateRunningPlugin()
-#    LedStrip.getInstance().setBrightness(40)
-#    __wordclock()
-#    return 'brightness set'
+    actualProgramState = 3
+    __runProgram()
 
+@app.route('/brightness', methods=['POST'])
+def setBrightness():
+    global brightness
+
+    brightness = 80
+    __runProgram()
 
 @app.route('/shutdown')
 def shutdown():
-    global executedProcess
-    terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'plugins/shutdown.py'])
-    return 'shutdown'
+    global actualProgramState
+
+    actualProgramState = 0
+    __runProgram()
+    return 'shutdown startet'
+
+@app.route('/restart', methods=['GET'])
+def restart():
+    global actualProgramState
+
+    actualProgramState = 1
+    __runProgram()
+    return 'restart started'
 
 def terminateRunningPlugin():
     global executedProcess
@@ -89,17 +109,29 @@ def terminateRunningPlugin():
 #    thread.start()
 #    threads.append(thread)
 
-def __wordclock(rgbColorTuple):
+def __wordclock():
+    global actualProgramState
+
+    actualProgramState = 2
+    __runProgram()
+
+
+def __runProgram():
     global executedProcess
+    global brightness
+    global acutalProgramState
+    global rgbColorTuple
 
+    print actualProgramState
+    
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 'plugins/wordclock.py', str(rgbColorTuple[0]), str(rgbColorTuple[1]), str(rgbColorTuple[2]), '123'])
-
-#def __ledtest():
-#    test = LedTest(Color(255,255,255), ledStrip)
-#    __run(test.run, 0, False)
-
+    executedProcess = subprocess.Popen(['python', 
+        programPath + programStates[actualProgramState], 
+        str(rgbColorTuple[0]), 
+        str(rgbColorTuple[1]), 
+        str(rgbColorTuple[2]), 
+        str(brightness)])
 
 if __name__ == '__main__':
-    __wordclock((123, 123, 123))
+    __wordclock()
     app.run(host = '0.0.0.0')
