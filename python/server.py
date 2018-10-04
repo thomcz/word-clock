@@ -54,12 +54,15 @@ def __countdown():
     actualProgramState = 3
     __runProgram()
 
-@app.route('/brightness', methods=['POST'])
+@app.route('/brightness', methods=['GET', 'POST'])
 def setBrightness():
     global brightness
-
-    brightness = 80
-    __runProgram()
+    if request.method == 'POST':
+        brightness = request.form['brightnessRange']
+        __runProgram()
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        return render_template('brightness.html')
 
 @app.route('/shutdown')
 def shutdown():
