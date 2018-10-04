@@ -17,7 +17,8 @@
   </div>
 
   <form action="{{ url_for('countdown') }}" method="post">
-	  <input type="color" name="color" value="#ff0000"></br>
+	  <label for="color">Select Color:</label><br>
+	  <input type="color" id="color" name="color" value="#ff0000"></br>
 	  <input type="submit" class="submit" value="Start">
   </form>
 
