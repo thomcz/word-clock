@@ -15,7 +15,8 @@ programStates = {
         0 : 'shutdown.py',
         1 : 'restart.py',
         2 : 'wordclock.py',
-        3 : 'countdown.py'
+        3 : 'countdown.py',
+        4 : 'figures.py'
         }
 actualProgramState = 2
 rgbColorTuple = (255, 255, 255)
@@ -53,6 +54,23 @@ def __countdown():
 
     actualProgramState = 3
     __runProgram()
+
+@app.route('/figure', methods=['GET', 'POST'])
+def setFigure():
+    global brightness
+    if request.method == 'POST':
+        figure = request.form['figure']
+        print figure
+        __setFigure(figure)
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        return render_template('figures.html')
+
+def __setFigure(figure):
+    global actualProgramState
+
+    actualProgramState = 4
+    __showFigure(figure)
 
 @app.route('/brightness', methods=['GET', 'POST'])
 def setBrightness():
@@ -118,11 +136,23 @@ def __wordclock():
     actualProgramState = 2
     __runProgram()
 
+def __showFigure(figure):
+    global executedProcess
+    global brightness
+    global actualProgramState
+
+    print actualProgramState
+    
+    terminateRunningPlugin()
+    executedProcess = subprocess.Popen(['python', 
+        programPath + programStates[actualProgramState], 
+        figure, 
+        str(brightness)])
 
 def __runProgram():
     global executedProcess
     global brightness
-    global acutalProgramState
+    global actualProgramState
     global rgbColorTuple
 
     print actualProgramState

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+
+  <div class="w3-bar w3-large w3-theme-d4">
+	  <span class="w3-bar-item w3-button" onclick="onclick=location.href='{{ url_for('index') }}';"><i class="fas fa-chevron-left"></i></span>
+    <span class="w3-bar-item">Figures</span>
+  </div>
+
+  <form action="{{ url_for('setFigure') }}" method="post">
+          <label for="figureSelect">Select A Figure:</label><br>
+	  <select name="figure">
+		  <option value="mario">Mario</option>
+	  </select><br>
+	  <input type="submit" class="submit" value="Start">
+  </form>
+
+
+</body>
+</html>
