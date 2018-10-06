@@ -17,8 +17,8 @@
   </div>
 
   <form action="{{ url_for('setFigure') }}" method="post">
-          <label for="figureSelect">Select A Figure:</label><br>
-	  <select name="figure">
+          <label for="figure">Select A Figure:</label><br>
+	  <select id="figure" name="figure">
 		  <option value="mario">Mario</option>
 	  </select><br>
 	  <input type="submit" class="submit" value="Start">

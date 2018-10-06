@@ -20,6 +20,7 @@ programStates = {
         }
 actualProgramState = 2
 rgbColorTuple = (255, 255, 255)
+actualFigure = None
 
 @app.route('/')
 def index():
@@ -57,10 +58,8 @@ def __countdown():
 
 @app.route('/figure', methods=['GET', 'POST'])
 def setFigure():
-    global brightness
     if request.method == 'POST':
         figure = request.form['figure']
-        print figure
         __setFigure(figure)
         return redirect(url_for('index'))
     elif request.method == 'GET':
@@ -68,16 +67,19 @@ def setFigure():
 
 def __setFigure(figure):
     global actualProgramState
+    global actualFigure
 
+    actualFigure = figure
     actualProgramState = 4
-    __showFigure(figure)
+    __runProgram(actualFigure)
 
 @app.route('/brightness', methods=['GET', 'POST'])
 def setBrightness():
     global brightness
+    global actualFigure
     if request.method == 'POST':
         brightness = request.form['brightnessRange']
-        __runProgram()
+        __runProgram(actualFigure)
         return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template('brightness.html')
@@ -104,52 +106,13 @@ def terminateRunningPlugin():
     if executedProcess != None:
         subprocess.Popen.terminate(executedProcess)
 
-#@ask.intent('GOL')
-#def gameOfLife():
-#    gol = GameOfLife(ledStrip)
-#    __run(gol.run, 1, True)
-#    return statement(render_template('gol_start'))
-
-#@ask.intent('LedsOff')
-#def ledsOff():
-#    off = LedsOff(ledStrip)
-#    __run(off.run, 0, False)
-#    return statement(render_template('lights_off'))
-
-
-#@ask.intent('Stopp')
-#def stop():
-#    for thread in threads:
-#        thread.stop()
-#        thread.join()
-#    return statement("")
-
-#def __run(func, waitingTime, loop):
-#    stop()
-#    thread = StoppableThread(func, waitingTime, loop)
-#    thread.start()
-#    threads.append(thread)
-
 def __wordclock():
     global actualProgramState
 
     actualProgramState = 2
     __runProgram()
 
-def __showFigure(figure):
-    global executedProcess
-    global brightness
-    global actualProgramState
-
-    print actualProgramState
-    
-    terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 
-        programPath + programStates[actualProgramState], 
-        figure, 
-        str(brightness)])
-
-def __runProgram():
+def __runProgram(figure = None):
     global executedProcess
     global brightness
     global actualProgramState
@@ -158,12 +121,18 @@ def __runProgram():
     print actualProgramState
     
     terminateRunningPlugin()
-    executedProcess = subprocess.Popen(['python', 
-        programPath + programStates[actualProgramState], 
-        str(rgbColorTuple[0]), 
-        str(rgbColorTuple[1]), 
-        str(rgbColorTuple[2]), 
-        str(brightness)])
+    if figure != None:
+        executedProcess = subprocess.Popen(['python', 
+            programPath + programStates[actualProgramState], 
+            figure, 
+            str(brightness)])
+    else:
+        executedProcess = subprocess.Popen(['python', 
+            programPath + programStates[actualProgramState], 
+            str(rgbColorTuple[0]), 
+            str(rgbColorTuple[1]), 
+            str(rgbColorTuple[2]), 
+            str(brightness)])
 
 if __name__ == '__main__':
     __wordclock()
