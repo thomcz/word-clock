@@ -1,11 +1,16 @@
 from strip.ledstrip import LedStrip
 from figures.mario import Mario
+from figures.heart import Heart
+from figures.melon import Melon
 from neopixel import *
 import strip.ledposition as ledPosition
 import sys
 
 class Figures:
-    figures = {"mario": Mario().getFigure()} 
+    figures = {"mario": Mario().getFigure(),
+                "heart": Heart().getFigure(),
+		"melon": Melon().getFigure()}
+ 
     def __init__(self, strip, figure):
         self.actualLeds = []
         self.strip = strip
