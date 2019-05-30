@@ -1,4 +1,4 @@
-package de.wordclock;
+package de.wordclock.plugin.wordclock;
 
 public enum WordClockStunden {
 	NULL("Zwoelf"), EIN("Eins"), ZWEI("Zwei"), DREI("Drei"), VIER("Vier"), FUENF("Fuenf"), SECHS("Sechs"),

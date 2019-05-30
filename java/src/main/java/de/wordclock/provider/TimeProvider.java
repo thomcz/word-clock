@@ -1,4 +1,4 @@
-package de.wordclock;
+package de.wordclock.provider;
 
 public interface TimeProvider {
 

@@ -1,4 +1,4 @@
-package de.wordclock;
+package de.wordclock.plugin.wordclock;
 
 public enum WordClockMinuten {
 	NULL(""), FUENF_NACH("Fuenf Nach"), ZEHN_NACH("Zehn Nach"), VIERTEL_NACH("Viertel Nach"),

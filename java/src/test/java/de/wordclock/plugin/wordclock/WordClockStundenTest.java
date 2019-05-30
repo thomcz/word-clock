@@ -1,4 +1,4 @@
-package de.wordclock;
+package de.wordclock.plugin.wordclock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -6,6 +6,9 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import de.wordclock.plugin.wordclock.WordClockStunden;
+import de.wordclock.provider.TimeProvider;
 
 public class WordClockStundenTest {
 	private TimeProvider timeProvider;

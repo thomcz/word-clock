@@ -1,4 +1,4 @@
-package de.wordclock;
+package de.wordclock.plugin.wordclock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -7,10 +7,10 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+import de.wordclock.plugin.wordclock.WordClockMinuten;
+import de.wordclock.provider.TimeProvider;
+
 public class WordClockMinutenTest {
 	private TimeProvider timeProvider;
 
