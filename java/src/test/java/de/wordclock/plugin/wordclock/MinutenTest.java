@@ -8,10 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import de.wordclock.plugin.wordclock.WordClockMinuten;
+import de.wordclock.plugin.wordclock.Minuten;
 import de.wordclock.provider.TimeProvider;
 
-public class WordClockMinutenTest {
+public class MinutenTest {
 	private TimeProvider timeProvider;
 
 	@BeforeEach
@@ -24,7 +24,7 @@ public class WordClockMinutenTest {
 	public void zeroMinuteTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert)).isEqualTo(WordClockMinuten.NULL.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert)).isEqualTo(Minuten.NULL.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -32,8 +32,8 @@ public class WordClockMinutenTest {
 	public void fuenfNachTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.FUENF_NACH.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.FUENF_NACH.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -41,8 +41,8 @@ public class WordClockMinutenTest {
 	public void zehnNachTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.ZEHN_NACH.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.ZEHN_NACH.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -50,8 +50,8 @@ public class WordClockMinutenTest {
 	public void viertelNachTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.VIERTEL_NACH.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.VIERTEL_NACH.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -59,8 +59,8 @@ public class WordClockMinutenTest {
 	public void zwanzigNachTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.ZWANZIG_NACH.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.ZWANZIG_NACH.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -68,8 +68,8 @@ public class WordClockMinutenTest {
 	public void fuenfUndZwanzigNachTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.FUENF_UND_ZWANZIG_NACH.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.FUENF_UND_ZWANZIG_NACH.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -77,7 +77,7 @@ public class WordClockMinutenTest {
 	public void halbTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert)).isEqualTo(WordClockMinuten.HALB.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert)).isEqualTo(Minuten.HALB.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -85,8 +85,8 @@ public class WordClockMinutenTest {
 	public void fuenfUndZwanzigVorTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.FUENF_UND_ZWANZIG_VOR.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.FUENF_UND_ZWANZIG_VOR.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -94,8 +94,8 @@ public class WordClockMinutenTest {
 	public void zwanzigVorTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.ZWANZIG_VOR.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.ZWANZIG_VOR.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -103,8 +103,8 @@ public class WordClockMinutenTest {
 	public void viertelVorTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.VIERTEL_VOR.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.VIERTEL_VOR.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -112,7 +112,7 @@ public class WordClockMinutenTest {
 	public void zehnVorTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert)).isEqualTo(WordClockMinuten.ZEHN_VOR.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert)).isEqualTo(Minuten.ZEHN_VOR.minuteValue());
 	}
 
 	@ParameterizedTest
@@ -120,8 +120,8 @@ public class WordClockMinutenTest {
 	public void fuenfVorTest(int minute) {
 		when(timeProvider.getMinutes()).thenReturn(minute);
 		int minutesToConvert = timeProvider.getMinutes();
-		assertThat(WordClockMinuten.convertMinute(minutesToConvert))
-				.isEqualTo(WordClockMinuten.FUENF_VOR.minuteValue());
+		assertThat(Minuten.convertMinute(minutesToConvert))
+				.isEqualTo(Minuten.FUENF_VOR.minuteValue());
 	}
 
 }

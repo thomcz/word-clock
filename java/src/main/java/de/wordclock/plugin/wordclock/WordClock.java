@@ -26,9 +26,9 @@ public class WordClock {
 		StringJoiner timeAsString = new StringJoiner(" ");
 		timeAsString.add(PREFIX);
 		if (minute > 0) {
-			timeAsString.add(WordClockMinuten.convertMinute(minute));
+			timeAsString.add(Minuten.convertMinute(minute));
 		}
-		timeAsString.add(WordClockStunden.convertStunde(hour));
+		timeAsString.add(Stunden.convertStunde(hour));
 		if (minute == 0) {
 			timeAsString.add(POSTFIX);
 		}
