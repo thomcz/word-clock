@@ -15,4 +15,9 @@ public enum WordClockMinuten {
 	public String minuteValue() {
 		return minuteValue;
 	}
+
+	public static String convertMinute(int minute) {
+		int wordClockMinute = minute / 5;
+		return values()[wordClockMinute].minuteValue();
+	}
 }
