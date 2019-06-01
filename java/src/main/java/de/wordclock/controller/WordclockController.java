@@ -1,7 +1,7 @@
 package de.wordclock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.wordclock.plugin.wordclock.Plugin;
@@ -12,14 +12,24 @@ public class WordclockController {
 	private Plugin wordClock;
 	private Thread thread;
 
-	@RequestMapping("/wordclock")
+	@PostMapping("/wordclock")
 	public void wordClock() {
-		thread = new Thread(wordClock);
-		thread.start();
+		startPlugin(wordClock);
 	}
 
-	@RequestMapping("/stop")
+	@PostMapping("/stop")
 	public void stop() {
-		thread.interrupt();
+		if (thread != null) {
+			thread.interrupt();
+		}
+	}
+
+	private void startPlugin(Plugin plugin) {
+		if (thread != null) {
+			thread.interrupt();
+		}
+		thread = new Thread(plugin);
+		thread.start();
+
 	}
 }
