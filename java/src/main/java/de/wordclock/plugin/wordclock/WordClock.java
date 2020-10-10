@@ -1,12 +1,11 @@
 package de.wordclock.plugin.wordclock;
 
 import java.util.StringJoiner;
-import java.util.concurrent.TimeUnit;
 
+import de.wordclock.device.IDevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.wordclock.device.LoggerDevice;
 import de.wordclock.provider.TimeProvider;
 
 @Service
@@ -15,22 +14,18 @@ public class WordClock implements Plugin {
 	private static final String PREFIX = "Es Ist";
 	private static final String POSTFIX = "Uhr";
 
-	@Autowired
-	private TimeProvider timeProvider;
+	private final TimeProvider timeProvider;
 
-	@Autowired
-	private LoggerDevice device;
+	private final IDevice device;
+
+	public WordClock(TimeProvider timeProvider, IDevice device) {
+		this.timeProvider = timeProvider;
+		this.device = device;
+	}
 
 	@Override
 	public void run() {
-		while (!Thread.interrupted()) {
-			try {
-				device.setState(getConvertedTime());
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-		}
+		device.setState(getConvertedTime());
 	}
 
 	public String getConvertedTime() {

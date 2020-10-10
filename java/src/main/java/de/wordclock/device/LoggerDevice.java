@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class LoggerDevice implements IDevice {
 	private final static Logger LOGGER = LoggerFactory.getLogger(LoggerDevice.class);
 
+	@Override
 	public void setState(String convertedTime) {
 		LOGGER.info(convertedTime);
 	}
