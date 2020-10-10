@@ -17,11 +17,11 @@ public class PluginService {
         this.executor = executor;
     }
 
-    public void startPlugin(Plugin plugin, long rate) {
+    public void startPlugin(Plugin plugin, long rateInMs) {
         stopActualPlugin();
-        actualScheduledPlugin = executor.scheduleAtFixedRate(plugin, rate);
+        actualScheduledPlugin = executor.scheduleAtFixedRate(plugin, rateInMs);
     }
-
+ 
     public void stopActualPlugin() {
         if (isNull(actualScheduledPlugin)) {
             return;
