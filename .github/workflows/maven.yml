@@ -22,12 +22,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file java/pom.xml
-    - name: Create a Release
-      uses: actions/create-release@v1.1.4
+    - name: Publish package
+      run: mvn -B deploy
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-        tag_name: snapshot
-        # The name of the release. For example, `Release v1.0.1`
-        release_name: snapshot
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
