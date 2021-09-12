@@ -3,7 +3,7 @@ import strip.ledconfig as ledconfig
 import strip.ledposition as ledPosition
 from time import sleep
 
-from neopixel import *
+from rpi_ws281x import *
 
 class GameOfLife():
     def __init__(self, strip):

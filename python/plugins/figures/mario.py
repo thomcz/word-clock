@@ -1,4 +1,4 @@
-from neopixel import *
+from rpi_ws281x import *
 
 class Mario:
     hat = [(2, 9), (3, 9), (4, 9), (5, 9), (6, 9),

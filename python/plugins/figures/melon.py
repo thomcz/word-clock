@@ -1,4 +1,4 @@
-from neopixel import *
+from rpi_ws281x import *
 
 class Melon:
     shell = [(7, 9), (8, 9),

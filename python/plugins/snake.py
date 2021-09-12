@@ -2,7 +2,7 @@ import strip.ledconfig as ledconfig
 import strip.ledposition as ledPosition
 from time import sleep
 from random import randint
-from neopixel import *
+from rpi_ws281x import *
 
 class Snake():
     def __init__(self, cells, color):

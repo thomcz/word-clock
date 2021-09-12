@@ -1,7 +1,7 @@
 import datetime
 from strip.ledstrip import LedStrip
 from strip.states import WordclockStates
-from neopixel import *
+from rpi_ws281x import *
 
 import logging
 from time import sleep
@@ -20,7 +20,7 @@ class WordClock:
         
         logging.info('time was set')
 
-	newLeds = self.__calculateTime(now.minute, now.hour)
+        newLeds = self.__calculateTime(now.minute, now.hour)
         self.__setTime(newLeds)
         
     def __setTime(self, newLeds):    
@@ -42,7 +42,7 @@ class WordClock:
            
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print "invalid number of arguments"
+        print("invalid number of arguments")
     LedStrip.getInstance().setBrightness(int(sys.argv[4]))
     wordclock = WordClock(LedStrip.getInstance(), Color(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])))
     while(True):

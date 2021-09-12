@@ -2,7 +2,7 @@ from strip.ledstrip import LedStrip
 from figures.mario import Mario
 from figures.heart import Heart
 from figures.melon import Melon
-from neopixel import *
+from rpi_ws281x import *
 import strip.ledposition as ledPosition
 import sys
 

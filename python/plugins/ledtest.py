@@ -2,7 +2,7 @@ from time import sleep
 
 import strip.states as states
 
-from neopixel import *
+from rpi_ws281x import *
 
 class LedTest():
 

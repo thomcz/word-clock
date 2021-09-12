@@ -4,7 +4,7 @@ from strip.states import WordclockStates
 
 import sys
 
-from neopixel import *
+from rpi_ws281x import *
  
 class Countdown():
 
