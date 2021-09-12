@@ -2,7 +2,7 @@ from plugins.wordclock import WordClock
 from plugins.countdown import Countdown
 import subprocess as subprocess
 
-from neopixel import *
+from rpi_ws281x import *
 
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -118,7 +118,7 @@ def __runProgram(figure = None):
     global actualProgramState
     global rgbColorTuple
 
-    print actualProgramState
+    print(actualProgramState)
     
     terminateRunningPlugin()
     if figure != None:
